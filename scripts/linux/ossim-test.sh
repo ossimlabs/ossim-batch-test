@@ -17,14 +17,21 @@
 ACCEPT_RESULTS=$1
 
 pushd `dirname $0` >/dev/null
-OSSIMCI_SCRIPT_DIR=`pwd -P`
+BATCH_TEST_SCRIPT_DIR=`pwd -P`
 popd >/dev/null
 
-source $OSSIMCI_SCRIPT_DIR/ossim-env.sh
-if [ $? != 0 ] ; then 
-  echo "ERROR: Could not set OBT environment.";
-  echo; exit 1;
-fi
+if [ -d $BATCH_TEST_SCRIPT_DIR/../../../ossim-ci ] ; then
+  pushd $BATCH_TEST_SCRIPT_DIR/../../../ossim-ci/script/linux > /dev/null
+  source ./ossim-env.sh
+  if [ $? != 0 ] ; then 
+    echo "ERROR: Could not set OBT environment.";
+    echo; exit 1;
+  fi
+  popd > /dev/null
+else
+  echo "ERROR: ossim-ci directory does not exist: ${BATCH_TEST_SCRIPT_DIR/../../../ossim-ci}"
+  exit 1
+fi 
 
 export LD_LIBRARY_PATH="${OSSIM_INSTALL_PREFIX}/lib64:${OSSIM_INSTALL_PREFIX}/lib64/ossim/plugins:${LD_LIBRARY_PATH}"
 export PATH="${OSSIM_INSTALL_PREFIX}/bin:${PATH}"
@@ -94,7 +101,7 @@ echo "STATUS: Syncronizing test data from S3 to local agent."
 runCommand "aws s3 sync $S3_DATA_BUCKET/Batch_test_data $OSSIM_BATCH_TEST_DATA"
 runCommand "aws s3 sync $S3_DATA_BUCKET/elevation $OSSIM_DATA/elevation"
 
-pushd $OSSIM_DEV_HOME/ossim-ci/batch_tests;
+pushd $OSSIM_DEV_HOME/ossim-batch-test;
 
 if [ "$ACCEPT_RESULTS" == "accept" ]; then
   echo "STATUS: Running batch test and accepting results."   

@@ -1,8 +1,6 @@
 def notifyObj
 node("BATCH_TEST"){
    env.WORKSPACE=pwd()
-//   env.LD_LIBRARY_PATH="${env.WORKSPACE}/install/lib64:${env.WORKSPACE}/install/lib64/ossim/plugins:${env.LD_LIBRARY_PATH}"
-//   env.PATH="${env.WORKSPACE}/install/bin:${env.PATH}"
    env.S3_DATA_BUCKET="s3://o2-test-data"
    
    echo "WORKSPACE        = ${env.WORKSPACE}"
@@ -15,6 +13,9 @@ node("BATCH_TEST"){
      stage("Checkout") {
          dir("ossim-ci") {
             git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-ci.git'
+         }
+         dir("ossim-batch-test") {
+            git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-batch-test.git'
          }
          notifyObj = load "${env.WORKSPACE}/ossim-ci/jenkins/pipeline/notify.groovy"
      }
@@ -35,7 +36,7 @@ node("BATCH_TEST"){
        stage("Accept Results")
        {
           sh """
-          pushd ${env.WORKSPACE}/ossim-ci/scripts/linux
+          pushd ${env.WORKSPACE}/ossim-batch-test/scripts/linux
           ./ossim-test.sh accept
           popd
           """
@@ -45,7 +46,7 @@ node("BATCH_TEST"){
        stage("Run Tests")
        {
           sh """
-          pushd ${env.WORKSPACE}/ossim-ci/scripts/linux
+          pushd ${env.WORKSPACE}/ossim-batch-test/scripts/linux
           ./ossim-test.sh
           popd
           """
