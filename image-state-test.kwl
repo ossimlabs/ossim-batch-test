@@ -1,0 +1,18 @@
+//---
+// File image-state-test.kwl
+//---
+
+// ---
+// Begin test1:
+// ---
+test1.name: test1
+test1.description: Test timing of state open
+test1.enabled: 1
+
+//test1.expected_results_command0:
+test1.test_command0: ossim-image-handler-state-test --min-speedup 2.5 s3://o2-test-data/brevard/q3305nw.tif
+ 
+// ---
+// End test1:
+// ---
+
