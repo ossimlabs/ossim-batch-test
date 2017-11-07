@@ -21,7 +21,7 @@ BATCH_TEST_SCRIPT_DIR=`pwd -P`
 popd >/dev/null
 
 if [ -d $BATCH_TEST_SCRIPT_DIR/../../../ossim-ci ] ; then
-  pushd $BATCH_TEST_SCRIPT_DIR/../../../ossim-ci/script/linux > /dev/null
+  pushd $BATCH_TEST_SCRIPT_DIR/../../../ossim-ci/scripts/linux > /dev/null
   source ./ossim-env.sh
   if [ $? != 0 ] ; then 
     echo "ERROR: Could not set OBT environment.";
