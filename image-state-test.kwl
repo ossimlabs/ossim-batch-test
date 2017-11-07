@@ -16,3 +16,17 @@ test1.test_command0: ossim-image-handler-state-test --min-speedup 2.5 s3://o2-te
 // End test1:
 // ---
 
+// ---
+// Begin test2:
+// ---
+test2.name: test2
+test2.description: Test timing of state open
+test2.enabled: 1
+
+//test1.expected_results_command0:
+test2.test_command0: ossim-image-handler-state-test --geom-test s3://o2-test-data/brevard/q3305nw.tif
+ 
+// ---
+// End test1:
+// ---
+
