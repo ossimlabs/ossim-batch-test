@@ -20,7 +20,7 @@ test1.test_command0: ossim-image-handler-state-test --min-speedup 2.5 s3://o2-te
 // Begin test2:
 // ---
 test2.name: test2
-test2.description: Test timing of state open
+test2.description: Test geom creation from state open and normal open
 test2.enabled: 1
 
 //test1.expected_results_command0:
