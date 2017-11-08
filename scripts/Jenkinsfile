@@ -9,6 +9,7 @@ node("BATCH_TEST"){
    echo "S3_DATA_BUCKET   = ${env.S3_DATA_BUCKET}"
    echo "ACCEPT_TESTS     = ${ACCEPT_TESTS}"
    echo "OSSIM_GIT_BRANCH = ${OSSIM_GIT_BRANCH}"
+   echo "DO_CLEANUP       = ${DO_CLEANUP}"
    try{
      stage("Checkout") {
          dir("ossim-ci") {
@@ -59,7 +60,14 @@ node("BATCH_TEST"){
     currentBuild.result = "FAILED"
     notifyObj?.notifyFailed()
   }
-  stage("Clean Workspace"){
-     step([$class: 'WsCleanup'])
-  }
+   if ( "${DO_CLEANUP}" == "true")
+   {
+      stage("Clean Workspace"){
+         step([$class: 'WsCleanup'])
+      }
+   }
+   else
+   {
+      echo "The cleanup stage was skipped. Make sure workspace <${env.WORKSPACE}> is manually cleaned out at some point."
+   }
 }
