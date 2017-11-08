@@ -72,7 +72,9 @@ runCommand "ossim-info --config --plugins"
 echo "STATUS: Passed ossim-info --config test.";
 
 echo; echo "STATUS: Running ossim-info --version test...";
-COUNT="$(ossim-info --version | grep --count 'version: 1.9')"
+VERSION_OUT="$(ossim-info --version)"
+echo $VERSION_OUT
+COUNT="$(echo $VERSION_OUT | grep --count 'version: 1.9')"
 echo "COUNT = <$COUNT>"
 if [ $COUNT != "1" ]; then
   echo "FAIL: Failed ossim-info --version test"; 
