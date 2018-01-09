@@ -16,7 +16,7 @@
 # Set run-time environment:
 ACCEPT_RESULTS=$1
 
-pushd `dirname $0` >/dev/null
+pushd `dirname ${BASH_SOURCE[0]}` >/dev/null
 BATCH_TEST_SCRIPT_DIR=`pwd -P`
 popd >/dev/null
 
