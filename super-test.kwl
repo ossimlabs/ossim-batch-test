@@ -63,7 +63,7 @@ test_config_file6: genras-writer-test.kwl
 test_config_file7: hlz-test.kwl
 test_config_file8: viewshed-test.kwl
 test_config_file9: lut-test.kwl
-test_config_file10: potrace-test.kwl
+//test_config_file10: potrace-test.kwl
 test_config_file11: vertices-test.kwl
 test_config_file12: kmeans-test.kwl
 test_config_file13: ossim-chipper-test.kwl
