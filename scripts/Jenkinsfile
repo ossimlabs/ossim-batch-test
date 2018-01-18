@@ -27,9 +27,17 @@ node("BATCH_TEST"){
               filter: "artifacts/ossim-install.tgz",
               flatten: true,
               target: "${env.WORKSPACE}"])
+        step ([$class: 'CopyArtifact',
+              projectName: "omar-opencv3_2-dev-${OSSIM_GIT_BRANCH}",
+              filter: "opencv-3.2-minimal-install.tgz",
+              flatten: true,
+              target: "${env.WORKSPACE}"])
         sh """
           pushd ${env.WORKSPACE}
           tar xvfz ossim-install.tgz
+          pushd install
+          tar xvfz ${env.WORKSPACE}/opencv-3.2-minimal-install.tgz
+          popd
           popd
         """
      }
