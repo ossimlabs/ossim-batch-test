@@ -26,40 +26,66 @@
 test1.description: Test of atp plugin getAlgorithms method
 
 // Commands to generate expected results.
-test1.expected_results_command0: $(OSSIM_BATCH_TEST_DATA)/public/atp/run-ossim-cli.sh getAlgorithms.json $(OBT_EXP_DIR)/algorithms.json
+test1.expected_results_command0: ossim-cli atp -i $(OSSIM_BATCH_TEST_DATA)/public/atp/getAlgorithms.json -o $(OBT_EXP_DIR)/algorithms.json
 
 // The actual commands to test.
-test1.test_command0: $(OSSIM_BATCH_TEST_DATA)/public/atp/run-ossim-cli.sh getAlgorithms.json $(OBT_OUT_DIR)/algorithms.json
+test1.test_command0: ossim-cli atp -i $(OSSIM_BATCH_TEST_DATA)/public/atp/getAlgorithms.json -o $(OBT_OUT_DIR)/algorithms.json
 
 // The post-processing (comparison) commands. Typically these involve a file 
 // comparison of last run command against expected results.
 test1.postprocess_command0: $(DIFF_CMD) $(OBT_EXP_DIR)/algorithms.json $(OBT_OUT_DIR)/algorithms.json
 
+//===================================================================================
 
-test2.description: Test of atp plugin getParameters method
-
-// Commands to generate expected results.
-test2.expected_results_command0: $(OSSIM_BATCH_TEST_DATA)/public/atp/run-ossim-cli.sh getParameters.json $(OBT_EXP_DIR)/parameters.json
-
-// The actual commands to test.
-test2.test_command0: $(OSSIM_BATCH_TEST_DATA)/public/atp/run-ossim-cli.sh getParameters.json $(OBT_OUT_DIR)/parameters.json
-
-// The post-processing (comparison) commands. Typically these involve a file 
-// comparison of last run command against expected results.
-test2.postprocess_command0: $(DIFF_CMD) $(OBT_EXP_DIR)/parameters.json $(OBT_OUT_DIR)/parameters.json
-
-
-test3.description: Test of atp plugin auto-tie-point generation
+test2.description: Test of atp plugin getParameters method for crosscorr algo
 
 // Commands to generate expected results.
-test3.expected_results_command0: $(OSSIM_BATCH_TEST_DATA)/public/atp/run-ossim-cli.sh generate.json $(OBT_EXP_DIR)/atps.json
+test2.expected_results_command0: ossim-cli atp -i $(OSSIM_BATCH_TEST_DATA)/public/atp/getCrosscorrParameters.json -o $(OBT_EXP_DIR)/crosscorr-parameters.json
 
 // The actual commands to test.
-test3.test_command0: $(OSSIM_BATCH_TEST_DATA)/public/atp/run-ossim-cli.sh generate.json $(OBT_OUT_DIR)/atps.json
+test2.test_command0: ossim-cli atp -i $(OSSIM_BATCH_TEST_DATA)/public/atp/getCrosscorrParameters.json -o $(OBT_OUT_DIR)/crosscorr-parameters.json
 
-// The post-processing (comparison) commands. Typically these involve a file 
-// comparison of last run command against expected results.
-test3.postprocess_command0: $(DIFF_CMD) $(OBT_EXP_DIR)/atps.json $(OBT_OUT_DIR)/atps.json
+// The post-processing (comparison) commands. Typically these involve a file comparison of last run command against expected results.
+test2.postprocess_command0: $(DIFF_CMD) $(OBT_EXP_DIR)/crosscorr-parameters.json $(OBT_OUT_DIR)/crosscorr-parameters.json
+
+//===================================================================================
+
+test3.description: Test of atp plugin getParameters method for descriptor algo
+
+// Commands to generate expected results.
+test3.expected_results_command0: ossim-cli atp -i $(OSSIM_BATCH_TEST_DATA)/public/atp/getDescriptorParameters.json -o $(OBT_EXP_DIR)/descriptor-parameters.json
+
+// The actual commands to test.
+test3.test_command0: ossim-cli atp -i $(OSSIM_BATCH_TEST_DATA)/public/atp/getDescriptorParameters.json -o $(OBT_OUT_DIR)/descriptor-parameters.json
+
+// The post-processing (comparison) commands. Typically these involve a file comparison of last run command against expected results.
+test3.postprocess_command0: $(DIFF_CMD) $(OBT_EXP_DIR)/descriptor-parameters.json $(OBT_OUT_DIR)/descriptor-parameters.json
+
+//===================================================================================
+
+test4.description: Test of atp plugin auto-tie-point generation using crosscorr algorithm
+
+// Commands to generate expected results.
+test4.expected_results_command0: ossim-cli atp -i $(OSSIM_BATCH_TEST_DATA)/public/atp/crosscorr.json -o $(OBT_EXP_DIR)/crosscorr-atps.json
+
+// The actual commands to test.
+test4.test_command0: ossim-cli atp -i $(OSSIM_BATCH_TEST_DATA)/public/atp/crosscorr.json -o $(OBT_OUT_DIR)/crosscorr-atps.json
+
+// The post-processing (comparison) commands. Typically these involve a file comparison of last run command against expected results.
+test4.postprocess_command0: $(DIFF_CMD) $(OBT_EXP_DIR)/crosscorr-atps.json $(OBT_OUT_DIR)/crosscorr-atps.json
+
+//===================================================================================
+
+test5.description: Test of atp plugin auto-tie-point generation using descriptor-based algorithm
+
+// Commands to generate expected results.
+test5.expected_results_command0: ossim-cli atp -i $(OSSIM_BATCH_TEST_DATA)/public/atp/descriptor.json -o $(OBT_EXP_DIR)/descriptor-atps.json
+
+// The actual commands to test.
+test5.test_command0: ossim-cli atp -i $(OSSIM_BATCH_TEST_DATA)/public/atp/descriptor.json -o $(OBT_OUT_DIR)/descriptor-atps.json
+
+// The post-processing (comparison) commands. Typically these involve a file comparison of last run command against expected results.
+test5.postprocess_command0: $(DIFF_CMD) $(OBT_EXP_DIR)/descriptor-atps.json $(OBT_OUT_DIR)/descriptor-atps.json
 
 
 
