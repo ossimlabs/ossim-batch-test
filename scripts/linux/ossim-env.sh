@@ -1,10 +1,13 @@
 #!/bin/bash
 
 #set -x; trap read debug
+pushd `dirname ${BASH_SOURCE[0]}` >/dev/null
+SCRIPT_DIR=`pwd -P`
+popd
 
 if [ -z $WORKSPACE ] ; then
    if [ -z $OSSIM_DEV_HOME ] ; then
-      pushd $BATCH_TEST_SCRIPT_DIR/../../.. >/dev/null
+      pushd SCRIPT_DIR/../../.. >/dev/null
       export OSSIM_DEV_HOME=$PWD
       popd > /dev/null
    fi
@@ -31,7 +34,7 @@ if [ -z $OSSIM_BATCH_TEST_RESULTS ] ; then
 fi
 
 # Always use the prefs file provided in this repo:
-export OSSIM_PREFS_FILE=$BATCH_TEST_SCRIPT_DIR/../../ossim.config
+export OSSIM_PREFS_FILE=SCRIPT_DIR/../../ossim.config
 
 # For S3 storage/syncing of test data
 if [ -z $S3_DATA_BUCKET ] ; then
