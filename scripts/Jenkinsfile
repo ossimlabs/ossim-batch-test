@@ -38,9 +38,9 @@ node("BATCH_TEST"){
         sh """
           pushd ${env.WORKSPACE}
           tar xvfz ossim-install.tgz
-//          pushd install
-//          tar xvfz ${env.WORKSPACE}/opencv*.tgz
-//          popd
+          #pushd install
+          #tar xvfz ${env.WORKSPACE}/opencv*.tgz
+          #popd
           popd
         """
      }
