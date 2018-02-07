@@ -30,17 +30,9 @@ node("BATCH_TEST"){
               filter: "artifacts/ossim-install.tgz",
               flatten: true,
               target: "${env.WORKSPACE}"])
-        step ([$class: 'CopyArtifact',
-              projectName: "opencv-build",
-              filter: "*.tgz",
-              flatten: true,
-              target: "${env.WORKSPACE}"])
         sh """
           pushd ${env.WORKSPACE}
           tar xvfz ossim-install.tgz
-          pushd install
-          tar xvfz ${env.WORKSPACE}/opencv*.tgz
-          popd
           popd
         """
      }
