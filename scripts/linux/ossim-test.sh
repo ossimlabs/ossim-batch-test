@@ -18,6 +18,7 @@ ACCEPT_RESULTS=$1
 
 pushd `dirname ${BASH_SOURCE[0]}` >/dev/null
 BATCH_TEST_SCRIPT_DIR=`pwd -P`
+source ossim-env.sh
 popd >/dev/null
 
 if [ -z $WORKSPACE ] ; then
