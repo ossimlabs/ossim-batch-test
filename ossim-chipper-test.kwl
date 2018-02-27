@@ -232,3 +232,20 @@ test7.postprocess_command1: $(DIFF_CMD) $(OBT_EXP_DIR)/t7.his $(OBT_OUT_DIR)/t7.
 
 
 
+// Commands to generate expected results:
+
+test8.expected_results_command0: ossim-chipper --options $(OSSIM_BATCH_TEST_DATA)/sanfran_small_utm/chipper-options.kwl $(OBT_EXP_DIR)/t8.jpg
+
+// The actual commands to test:
+
+test8.test_command0: ossim-chipper --options $(OSSIM_BATCH_TEST_DATA)/sanfran_small_utm/chipper-options.kwl $(OBT_OUT_DIR)/t8.jpg
+
+
+// Post process commands for diffs and stuff:
+
+test8.postprocess_command0: $(DIFF_CMD) $(OBT_EXP_DIR)/t8.jpg $(OBT_OUT_DIR)/t8.jpg
+
+// ---
+// End test7:
+// ---
+
