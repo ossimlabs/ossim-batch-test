@@ -42,7 +42,7 @@ test2.enabled: 1
 
 // Commands to generate expected results:
 
-test2.expected_results_command0: ossim-chipper --op ortho --histogram-op auto-minmax --cut-center-llwh 18.6625 -71.9018055555556 512 512 --scale-to-8-bit -w tiff_tiled_band_separate $(OSSIM_BATCH_TEST_DATA)/single_tile_nitf/sar/sar_test.nitf $(OBT_EXP_DIR)/t2.tif
+test2.expected_results_command0: ossim-chipper --op ortho --histogram-op auto-minmax --cut-center-llwh  31.3331944444445 -110.940972222222 512 512 --scale-to-8-bit -w tiff_tiled_band_separate $(OSSIM_BATCH_TEST_DATA)/single_tile_nitf/sar/sar_test.nitf $(OBT_EXP_DIR)/t2.tif
 
 test2.expected_results_command1: ossim-preproc -r --ot ossim_kakadu_nitf_j2k --create-histogram $(OBT_EXP_DIR)/t2.tif
 
@@ -50,7 +50,7 @@ test2.expected_results_command2: ossim-info -d -i -p $(OBT_EXP_DIR)/t2.tif > $(O
 
 // The actual commands to test:
 
-test2.test_command0: ossim-chipper --op ortho --histogram-op auto-minmax --cut-center-llwh 18.6625 -71.9018055555556 512 512 --scale-to-8-bit -w tiff_tiled_band_separate $(OSSIM_BATCH_TEST_DATA)/single_tile_nitf/sar/sar_test.nitf $(OBT_EXP_DIR)/t2.tif
+test2.test_command0: ossim-chipper --op ortho --histogram-op auto-minmax --cut-center-llwh  31.3331944444445 -110.940972222222 512 512 --scale-to-8-bit -w tiff_tiled_band_separate $(OSSIM_BATCH_TEST_DATA)/single_tile_nitf/sar/sar_test.nitf $(OBT_EXP_DIR)/t2.tif
 
 test2.test_command1: ossim-preproc -r --ot ossim_kakadu_nitf_j2k --create-histogram $(OBT_EXP_DIR)/t2.tif
 
