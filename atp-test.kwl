@@ -87,5 +87,18 @@ test5.test_command0: ossim-cli atp -i $(OSSIM_BATCH_TEST_DATA)/public/atp/descri
 // The post-processing (comparison) commands. Typically these involve a file comparison of last run command against expected results.
 test5.postprocess_command0: $(DIFF_CMD) $(OBT_EXP_DIR)/descriptor-atps.json $(OBT_OUT_DIR)/descriptor-atps.json
 
+//===================================================================================
+
+test6.description: Test of atp plugin auto-tie-point generation using crosscorr algorithm with parallax processing
+
+// Commands to generate expected results.
+test6.expected_results_command0: ossim-cli atp -i $(OSSIM_BATCH_TEST_DATA)/public/atp/crosscorrWithParallax.json -o $(OBT_EXP_DIR)/crosscorrWithParallax-atps.json
+
+// The actual commands to test.
+test6.test_command0: ossim-cli atp -i $(OSSIM_BATCH_TEST_DATA)/public/atp/crosscorrWithParallax.json -o $(OBT_OUT_DIR)/crosscorrWithParallax-atps.json
+
+// The post-processing (comparison) commands. Typically these involve a file comparison of last run command against expected results.
+test6.postprocess_command0: $(DIFF_CMD) $(OBT_EXP_DIR)/crosscorrWithParallax-atps.json $(OBT_OUT_DIR)/crosscorrWithParallax-atps.json
+
 
 
