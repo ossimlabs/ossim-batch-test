@@ -1,5 +1,5 @@
 def notifyObj
-node(""){
+node("BATCH_TEST"){
    env.WORKSPACE=pwd()
    env.S3_DATA_BUCKET="s3://o2-test-data"
    
