@@ -67,7 +67,7 @@ test_config_file9: lut-test.kwl
 test_config_file11: vertices-test.kwl
 test_config_file12: kmeans-test.kwl
 //test_config_file13: ossim-chipper-test.kwl
-test_config_file14: viirs-hdf5-test.kwl
+//test_config_file14: viirs-hdf5-test.kwl
 test_config_file15: image-state-test.kwl
 test_config_file16: atp-test.kwl
 test_config_file17: single-tile-nitf-test.kwl
