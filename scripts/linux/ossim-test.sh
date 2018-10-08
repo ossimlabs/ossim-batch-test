@@ -78,8 +78,8 @@ if [ -z $S3_DATA_BUCKET ]; then
   echo;
 fi
 echo "STATUS: Syncronizing test data from S3 to local agent." 
-runCommand "aws s3 sync $S3_DATA_BUCKET/Batch_test_data $OSSIM_BATCH_TEST_DATA"
-runCommand "aws s3 sync $S3_DATA_BUCKET/elevation $OSSIM_DATA/elevation"
+runCommand "aws s3 sync $S3_DATA_BUCKET/Batch_test_data $OSSIM_BATCH_TEST_DATA --no-progress"
+runCommand "aws s3 sync $S3_DATA_BUCKET/elevation $OSSIM_DATA/elevation --no-progress"
 
 pushd $OSSIM_DEV_HOME/ossim-batch-test;
 
@@ -87,12 +87,12 @@ if [ "$ACCEPT_RESULTS" == "accept" ]; then
   echo "STATUS: Running batch test and accepting results."   
   runCommand "ossim-batch-test -a all super-test.kwl"
   echo "STATUS: Uploading expected results to S3."  
-  echo "aws s3 sync $OSSIM_BATCH_TEST_EXPECTED $S3_DATA_BUCKET/Batch_test_expected/${OSSIM_GIT_BRANCH}"
-  runCommand "aws s3 sync $OSSIM_BATCH_TEST_EXPECTED $S3_DATA_BUCKET/Batch_test_expected/${OSSIM_GIT_BRANCH}"
+  echo "aws s3 sync $OSSIM_BATCH_TEST_EXPECTED $S3_DATA_BUCKET/Batch_test_expected/${OSSIM_GIT_BRANCH} --no-progress"
+  runCommand "aws s3 sync $OSSIM_BATCH_TEST_EXPECTED $S3_DATA_BUCKET/Batch_test_expected/${OSSIM_GIT_BRANCH} --no-progress"
   echo "STATUS: Upload successfull."   
 else
   echo "STATUS: Syncronizing expected results from S3 to local agent." 
-  runCommand "aws s3 sync $S3_DATA_BUCKET/Batch_test_expected/${OSSIM_GIT_BRANCH} $OSSIM_BATCH_TEST_EXPECTED"
+  runCommand "aws s3 sync $S3_DATA_BUCKET/Batch_test_expected/${OSSIM_GIT_BRANCH} $OSSIM_BATCH_TEST_EXPECTED --no-progress"
   echo "STATUS: Running batch test and comparing to expected results."   
   runCommand "ossim-batch-test super-test.kwl"
 fi
