@@ -128,6 +128,19 @@ test5.test_command0: ossim-loadtile-test > $(OBT_OUT_DIR)/test5.txt
 test5.postprocess_command0: $(DIFF_CMD) $(OBT_EXP_DIR)/test5.txt $(OBT_OUT_DIR)/test5.txt
 
 // ---
-// End: test5
+// Begin: test6
 // ---
+test6.name: test6
+test6.description: Test rotated utm projection with tiff format containing tag 34264.
+test6.enabled: 1
+
+// Commands to generate expected results:
+test6.expected_results_command0: ossim-info -d -i -p $(OSSIM_BATCH_TEST_DATA)/public/ls7/Australia_Geoscience/LS7_ETM_SYS_P31_GLS2000_073_073_20000227_b1.tif > $(OBT_EXP_DIR)/tif-rutm-info.txt
+
+// The actual commands to test:
+test6.test_command0: ossim-info -d -i -p $(OSSIM_BATCH_TEST_DATA)/public/ls7/Australia_Geoscience/LS7_ETM_SYS_P31_GLS2000_073_073_20000227_b1.tif  > $(OBT_OUT_DIR)/tif-rutm-info.txt
+
+// Post process commands for diffs and stuff:
+test6.postprocess_command0: $(DIFF_CMD) $(OBT_EXP_DIR)/tif-rutm-info.txt $(OBT_OUT_DIR)/tif-rutm-info.txt
+
  
