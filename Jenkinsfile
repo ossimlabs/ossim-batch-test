@@ -50,7 +50,7 @@ node("${BUILD_NODE}")
          sh """
            mkdir ${env.WORKSPACE}/ossim-install
            pushd ${env.WORKSPACE}/ossim-install
-           tar xvfz ossim-sandbox-centos-7-*.tgz
+           tar xvfz ${env.WORKSPACE}/ossim-sandbox-centos-7-*.tgz
            popd
          """
         }
