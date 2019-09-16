@@ -37,7 +37,7 @@ node("${BUILD_NODE}")
       {
         withCredentials([string(credentialsId: 'o2-artifact-project', variable: 'o2ArtifactProject')]) {
             step ([$class: "CopyArtifact",
-              projectName: "ossim-sandbox-docker-multibranch/${BRANCH_NAME}",
+              projectName: "ossim-sandbox-ossimbuild-multibranch/${BRANCH_NAME}",
               filter: "ossim-sandbox-centos-7-*.tgz",
               flatten: true])            
             step([$class     : 'CopyArtifact',
