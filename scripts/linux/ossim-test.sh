@@ -17,9 +17,17 @@
 ACCEPT_RESULTS=$1
 
 pushd `dirname ${BASH_SOURCE[0]}` >/dev/null
-BATCH_TEST_SCRIPT_DIR=`pwd -P`
-source ossim-env.sh
+OSSIM_TEST_SCRIPT_DIR=`pwd -P`
 popd >/dev/null
+
+source $OSSIM_TEST_SCRIPT_DIR/ossim-env.sh
+if [ $? != 0 ] ; then 
+  echo "ERROR: Could not set OBT environment.";
+  echo; exit 1;
+fi
+
+export LD_LIBRARY_PATH="${OSSIM_INSTALL_PREFIX}/lib64:${OSSIM_INSTALL_PREFIX}/lib64/ossim/plugins:${LD_LIBRARY_PATH}"
+export PATH="${OSSIM_INSTALL_PREFIX}/bin:${PATH}"
 
 function runCommand() 
 {
@@ -30,10 +38,13 @@ function runCommand()
   fi
 }
 
+
 echo; echo; 
 echo "################################################################################"
 echo "#  Running `basename "$0"` out of <$PWD>"
 echo "################################################################################"
+
+
 
 # Check for required environment:
 if [ -z $OSSIM_DATA ] || [  -z $OSSIM_BATCH_TEST_DATA ] || [ -z $OSSIM_BATCH_TEST_RESULTS ]; then
@@ -44,15 +55,17 @@ if [ -z $OSSIM_DATA ] || [  -z $OSSIM_BATCH_TEST_DATA ] || [ -z $OSSIM_BATCH_TES
   echo; exit 1;
 fi
 
+# Copy the ossim preferences file to the top install directory:
+echo; echo "STATUS: Copying ossim preferences to install directory...";
+runCommand "cp $OSSIM_DEV_HOME/ossim-ci/batch_tests/ossim.config $OSSIM_INSTALL_PREFIX"
+
 # Do basic ossim config and version check first:
 echo; echo "STATUS: Running ossim-info --config test...";
 runCommand "ossim-info --config --plugins"
 echo "STATUS: Passed ossim-info --config test.";
 
 echo; echo "STATUS: Running ossim-info --version test...";
-VERSION_OUT="$(ossim-info --version)"
-echo $VERSION_OUT
-COUNT="$(echo $VERSION_OUT | grep --count 'version: 1.9')"
+COUNT="$(ossim-info --version | grep --count 'version: 1.9')"
 echo "COUNT = <$COUNT>"
 if [ $COUNT != "1" ]; then
   echo "FAIL: Failed ossim-info --version test"; 
@@ -81,7 +94,7 @@ echo "STATUS: Syncronizing test data from S3 to local agent."
 runCommand "aws s3 sync $S3_DATA_BUCKET/Batch_test_data $OSSIM_BATCH_TEST_DATA --no-progress"
 runCommand "aws s3 sync $S3_DATA_BUCKET/elevation $OSSIM_DATA/elevation --no-progress"
 
-pushd $OSSIM_DEV_HOME/ossim-batch-test;
+pushd $OSSIM_DEV_HOME/ossim-ci/batch_tests;
 
 if [ "$ACCEPT_RESULTS" == "accept" ]; then
   echo "STATUS: Running batch test and accepting results."   
