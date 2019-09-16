@@ -90,7 +90,7 @@ echo "STATUS: Syncronizing test data from S3 to local agent."
 runCommand "aws s3 sync $S3_DATA_BUCKET/Batch_test_data $OSSIM_BATCH_TEST_DATA --no-progress"
 runCommand "aws s3 sync $S3_DATA_BUCKET/elevation $OSSIM_DATA/elevation --no-progress"
 
-pushd $OSSIM_DEV_HOME/ossim-ci/batch_tests;
+pushd $OSSIM_DEV_HOME/ossim-batch-test;
 
 if [ "$ACCEPT_RESULTS" == "accept" ]; then
   echo "STATUS: Running batch test and accepting results."   
