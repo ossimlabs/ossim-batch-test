@@ -15,21 +15,21 @@ else
    export OSSIM_DEV_HOME=$WORKSPACE
 fi
 
-if [ -z $OSSIM_INSTALL_PREFIX ]; then
+if [  "$OSSIM_INSTALL_PREFIX" == "" ]; then
   export OSSIM_INSTALL_PREFIX=$OSSIM_DEV_HOME/install
 fi
 
 # For OSSIM run-time environment:
-if [ -z $OSSIM_DATA ] ; then
+if [ "$OSSIM_DATA" == "" ] ; then
    export OSSIM_DATA="/data"
 fi
-if [ -z $OSSIM_BATCH_TEST_DATA ] ; then
+if [  "$OSSIM_BATCH_TEST_DATA" == "" ] ; then
    export OSSIM_BATCH_TEST_DATA="$OSSIM_DATA/ossim-data/${OSSIM_GIT_BRANCH}"
 fi
-if [ -z $OSSIM_BATCH_TEST_EXPECTED ] ; then
+if [ "$OSSIM_BATCH_TEST_EXPECTED" == "" ] ; then
    export OSSIM_BATCH_TEST_EXPECTED="$OSSIM_DATA/ossim-expected/${OSSIM_GIT_BRANCH}"
 fi
-if [ -z $OSSIM_BATCH_TEST_RESULTS ] ; then
+if [ "$OSSIM_BATCH_TEST_RESULTS" == "" ] ; then
    export OSSIM_BATCH_TEST_RESULTS="$OSSIM_DATA/ossim-results/${OSSIM_GIT_BRANCH}"
 fi
 
@@ -37,7 +37,7 @@ fi
 export OSSIM_PREFS_FILE=$SCRIPT_DIR/../../ossim.config
 
 # For S3 storage/syncing of test data
-if [ -z $S3_DATA_BUCKET ] ; then
+if [ "$S3_DATA_BUCKET" == "" ] ; then
    export S3_DATA_BUCKET="s3://o2_test_data"
 fi
 
