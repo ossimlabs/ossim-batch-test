@@ -53,7 +53,8 @@ node("${BUILD_NODE}")
      stage("Run Tests")
      {
         env.OSSIM_INSTALL_PREFIX="${env.WORKSPACE}/ossim-install"
-        // env.OSSIM_PREFS_PREFIX="${env.OSSIM_INSTALL_PREFIX}/share/ossim/ossim-site-preferences"
+        env.OSSIM_PREFS_PREFIX="${env.OSSIM_INSTALL_PREFIX}/share/ossim/ossim-site-preferences"
+        env.OSSIM_GIT_BRANCH = "${BRANCH_NAME}"
          sh """
            mkdir ${env.WORKSPACE}/ossim-install
            pushd ${env.WORKSPACE}/ossim-install
