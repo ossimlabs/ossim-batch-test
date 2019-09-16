@@ -62,25 +62,25 @@ node("${BUILD_NODE}")
 
      stage("Run Tests")
      {
-        // env.OSSIM_INSTALL_PREFIX="${env.WORKSPACE}/ossim-install"
-        // env.OSSIM_PREFS_PREFIX="${env.OSSIM_INSTALL_PREFIX}/share/ossim/ossim-site-preferences"
-        // if (ACCEPT_TESTS.toBoolean())
-        // {  
-        //   echo "**************ACCEPTING ALL TESTS*************"
-        //   sh """
-        //   pushd ${env.WORKSPACE}/ossim-batch-test/scripts/linux
-        //   ./ossim-test.sh accept
-        //   popd
-        //   """
-        // }
-        // else
-        // {
-        //   sh """
-        //   pushd ${env.WORKSPACE}/ossim-batch-test/scripts/linux
-        //   ./ossim-test.sh
-        //   popd
-        //   """
-        // }
+        env.OSSIM_INSTALL_PREFIX="${env.WORKSPACE}/ossim-install"
+        env.OSSIM_PREFS_PREFIX="${env.OSSIM_INSTALL_PREFIX}/share/ossim/ossim-site-preferences"
+        if (ACCEPT_TESTS.toBoolean())
+        {  
+          echo "**************ACCEPTING ALL TESTS*************"
+          sh """
+          pushd ${env.WORKSPACE}/ossim-batch-test/scripts/linux
+          ./ossim-test.sh accept
+          popd
+          """
+        }
+        else
+        {
+          sh """
+          pushd ${env.WORKSPACE}/ossim-batch-test/scripts/linux
+          ./ossim-test.sh
+          popd
+          """
+        }
      }
   }
   catch(e)
