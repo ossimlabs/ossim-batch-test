@@ -29,10 +29,6 @@ node("${BUILD_NODE}")
 
    try
    {
-      stage("Checkout")
-      {
-        checkout(scm)
-     }
       stage("Download Artifacts")
       {
         withCredentials([string(credentialsId: 'o2-artifact-project', variable: 'o2ArtifactProject')]) {
@@ -47,23 +43,28 @@ node("${BUILD_NODE}")
                   target     : "${env.WORKSPACE}"])
           }
 
+         load "common-variables.groovy"
+        }
+
+     stage("Checkout")
+     {
+         dir("ossim-batch-test"){
+            git branch: "${BRANCH_NAME}",
+            url: "${GIT_PUBLIC_SERVER_URL}/ossim-sandbox.git",
+            credentialsId: "${CREDENTIALS_ID}"
+         }
+     }
+
+     stage("Run Tests")
+     {
+        env.OSSIM_INSTALL_PREFIX="${env.WORKSPACE}/ossim-install"
+        env.OSSIM_PREFS_PREFIX="${env.OSSIM_INSTALL_PREFIX}/share/ossim/ossim-site-preferences"
          sh """
            mkdir ${env.WORKSPACE}/ossim-install
            pushd ${env.WORKSPACE}/ossim-install
            tar xvfz ${env.WORKSPACE}/ossim-sandbox-centos-7-*.tgz
            popd
          """
-        }
-
-      stage("Load Variables")
-      {
-         load "common-variables.groovy"
-      }
-
-     stage("Run Tests")
-     {
-        env.OSSIM_INSTALL_PREFIX="${env.WORKSPACE}/ossim-install"
-        env.OSSIM_PREFS_PREFIX="${env.OSSIM_INSTALL_PREFIX}/share/ossim/ossim-site-preferences"
         if (ACCEPT_TESTS.toBoolean())
         {  
           echo "**************ACCEPTING ALL TESTS*************"
