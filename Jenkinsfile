@@ -3,8 +3,7 @@
 properties([
     parameters ([
       string(name: 'BUILD_NODE', defaultValue: 'ossim-test-build', description: 'The build node to run on'),
-      booleanParam(name: 'ACCEPT_TESTS', defaultValue: false, description: 'Check this box to accept all tests as "expected results". The results from the tests will then be uploaded to s3 and replace the current expected results.')
-      string(name: 'ARTIFACT_TYPE', defaultValue: 'centos-7', description: 'type of artifact to pull'),
+      booleanParam(name: 'ACCEPT_TESTS', defaultValue: false, description: 'Check this box to accept all tests as "expected results". The results from the tests will then be uploaded to s3 and replace the current expected results.'),
       booleanParam(name: 'CLEAN_WORKSPACE', defaultValue: true, description: 'Clean the workspace at the end of the run')
     ]),
     pipelineTriggers([
