@@ -50,7 +50,7 @@ node("${BUILD_NODE}")
      {
          dir("ossim-batch-test"){
             git branch: "${BRANCH_NAME}",
-            url: "${GIT_PUBLIC_SERVER_URL}/ossim-sandbox.git",
+            url: "${GIT_PUBLIC_SERVER_URL}/ossim-batch-test.git",
             credentialsId: "${CREDENTIALS_ID}"
          }
      }
