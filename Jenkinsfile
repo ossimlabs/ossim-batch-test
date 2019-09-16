@@ -16,15 +16,6 @@ properties([
 
 node("${BUILD_NODE}")
 {
-  //  echo "WORKSPACE        = ${env.WORKSPACE}"
-  //  echo "LD_LIBRARY_PATH  = ${env.LD_LIBRARY_PATH}"
-  //  echo "PATH             = ${env.PATH}"
-  //  echo "S3_DATA_BUCKET   = ${env.S3_DATA_BUCKET}"
-  //  echo "ACCEPT_TESTS     = ${ACCEPT_TESTS}"
-  //  echo "OSSIM_PIPELINE   = ${OSSIM_PIPELINE}"
-  //  echo "OSSIM_GIT_BRANCH = ${OSSIM_GIT_BRANCH}"
-  //  echo "CLEAN_WORKSPACE  = ${CLEAN_WORKSPACE}"
-
    env.S3_DATA_BUCKET="s3://o2-test-data"
 
    try
@@ -34,7 +25,11 @@ node("${BUILD_NODE}")
         withCredentials([string(credentialsId: 'o2-artifact-project', variable: 'o2ArtifactProject')]) {
             step ([$class: "CopyArtifact",
               projectName: "ossim-sandbox-ossimbuild-multibranch/${BRANCH_NAME}",
-              filter: "ossim-sandbox-centos-7-*.tgz",
+              filter: "ossim-sandbox-centos-7-runtime.tgz",
+              flatten: true])            
+            step ([$class: "CopyArtifact",
+              projectName: "ossim-sandbox-ossimbuild-multibranch/${BRANCH_NAME}",
+              filter: "ossim-centos-7-runtime.tgz",
               flatten: true])            
             step([$class     : 'CopyArtifact',
                   projectName: o2ArtifactProject,
@@ -62,7 +57,8 @@ node("${BUILD_NODE}")
          sh """
            mkdir ${env.WORKSPACE}/ossim-install
            pushd ${env.WORKSPACE}/ossim-install
-           tar xvfz ${env.WORKSPACE}/ossim-sandbox-centos-7-*.tgz
+           tar xvfz ${env.WORKSPACE}/ossim-sandbox-centos-7-runtime.tgz
+           tar xvfz ${env.WORKSPACE}/ossim-centos-7-runtime.tgz
            popd
          """
         if (ACCEPT_TESTS.toBoolean())
