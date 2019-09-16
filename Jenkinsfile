@@ -7,7 +7,11 @@ properties([
       booleanParam(name: 'CLEAN_WORKSPACE', defaultValue: true, description: 'Clean the workspace at the end of the run')
     ]),
     pipelineTriggers([
-            [$class: "GitHubPushTrigger"]
+            [$class: "GitHubPushTrigger"],
+            [
+                $class: 'jenkins.triggers.ReverseBuildTrigger',
+                upstreamProjects: "ossim-sandbox-ossimbuild-multibranch/${BRANCH_NAME}", threshold: hudson.model.Result.SUCCESS
+            ]
     ]),
     [$class: 'GithubProjectProperty', displayName: '', projectUrlStr: 'https://github.com/ossimlabs/ossim-sandbox'],
     buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '3', daysToKeepStr: '', numToKeepStr: '20')),
