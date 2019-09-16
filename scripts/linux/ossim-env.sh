@@ -34,7 +34,9 @@ if [ "$OSSIM_BATCH_TEST_RESULTS" == "" ] ; then
 fi
 
 # Always use the prefs file provided in this repo:
-export OSSIM_PREFS_FILE=$SCRIPT_DIR/../../ossim.config
+if [ "$OSSIM_PREFS_FILE" == "" ] ;  then
+  export OSSIM_PREFS_FILE=$OSSIM_INSTALL_PREFIX/share/ossim/ossim-site-preferences
+fi
 
 # For S3 storage/syncing of test data
 if [ "$S3_DATA_BUCKET" == "" ] ; then
