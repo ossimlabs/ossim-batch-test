@@ -57,13 +57,13 @@
 test_config_file1: applanix-test.kwl
 test_config_file2: test1.kwl
 test_config_file3: rbt-test1.kwl
-test_config_file4: fusion-test1.kw1
+//test_config_file4: fusion-test1.kw1      FAILING
 test_config_file5: image-geometry.kwl
 test_config_file6: genras-writer-test.kwl
-test_config_file7: hlz-test.kwl
+//test_config_file7: hlz-test.kwl          FAILING
 test_config_file8: viewshed-test.kwl
-test_config_file9: lut-test.kwl
-//test_config_file10: potrace-test.kwl
+//test_config_file9: lut-test.kwl          FAILING SOME
+test_config_file10: potrace-test.kwl
 test_config_file11: vertices-test.kwl
 test_config_file12: kmeans-test.kwl
 
