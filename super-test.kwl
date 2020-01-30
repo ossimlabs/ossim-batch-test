@@ -54,15 +54,15 @@
 // run as one consolidated "super-test", then use only the following suffixed
 // keywords. Otherwise, REMOVE THESE:
 
-test_config_file1: applanix-test.kwl
-test_config_file2: test1.kwl
-test_config_file3: rbt-test1.kwl
-test_config_file4: fusion-test1.kw1 
-test_config_file5: image-geometry.kwl
-test_config_file6: genras-writer-test.kwl
-//test_config_file7: hlz-test.kwl          FAILING
-test_config_file8: viewshed-test.kwl
-//test_config_file9: lut-test.kwl          FAILING SOME
+test_config_file01: applanix-test.kwl
+test_config_file02: test1.kwl
+test_config_file03: rbt-test1.kwl
+test_config_file04: fusion-test1.kw1
+test_config_file05: image-geometry.kwl
+test_config_file06: genras-writer-test.kwl
+//test_config_file07: hlz-test.kwl          FAILING
+test_config_file08: viewshed-test.kwl
+//test_config_file09: lut-test.kwl          FAILING SOME
 //test_config_file10: potrace-test.kwl     NOT BUILDING THIS PLUGIN
 test_config_file11: vertices-test.kwl
 test_config_file12: kmeans-test.kwl
