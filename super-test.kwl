@@ -57,7 +57,7 @@
 test_config_file1: applanix-test.kwl
 test_config_file2: test1.kwl
 test_config_file3: rbt-test1.kwl
-test_config_file4: fusion-test1.kw1      FAILING
+test_config_file4: fusion-test1.kw1 
 test_config_file5: image-geometry.kwl
 test_config_file6: genras-writer-test.kwl
 //test_config_file7: hlz-test.kwl          FAILING
