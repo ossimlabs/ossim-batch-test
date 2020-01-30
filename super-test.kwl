@@ -76,4 +76,4 @@ test_config_file15: image-state-test.kwl
 
 //test_config_file16: atp-test.kwl
 test_config_file17: single-tile-nitf-test.kwl
-
+test_config_file18: wrap-test.kwl
