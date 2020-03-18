@@ -52,25 +52,55 @@
 // Begin test1:
 // ---
 test1.name: test1
-test1.description: Test output of edge to edge world scene.
+test1.description: Test output of edge to edge world scene with orthoigen.
 test1.enabled: 1
 
 // Commands to generate expected results:
 
-test1.expected_results_command0: ossim-orthoigen $(OSSIM_BATCH_TEST_DATA)/public/bmng/july/world.200407.3x5400x2700.jpg $(OBT_OUT_DIR)/t1.tif
+test1.expected_results_command0: ossim-orthoigen $(OSSIM_BATCH_TEST_DATA)/public/bmng/july/world.200407.3x5400x2700.jpg $(OBT_EXP_DIR)/t1.tif
 
-test1.expected_results_command1: ossim-preproc -r --ot ossim_kakadu_nitf_j2k --create-histogram-fast $(OBT_OUT_DIR)/t1.tif
+test1.expected_results_command1: ossim-preproc -r -o --ch $(OBT_EXP_DIR)/t1.tif
 
-test1.expected_results_command2: ossim-info -D -i -p $(OBT_OUT_DIR)/t1.tif > $(OBT_EXP_DIR)/t1-info.txt
+test1.expected_results_command2: ossim-info -d -i -p $(OBT_EXP_DIR)/t1.tif > $(OBT_EXP_DIR)/t1-info.txt
 
 // The actual commands to test:
 
 test1.test_command0: ossim-orthoigen $(OSSIM_BATCH_TEST_DATA)/public/bmng/july/world.200407.3x5400x2700.jpg $(OBT_OUT_DIR)/t1.tif
 
-test1.test_command1: ossim-preproc -r --ot ossim_kakadu_nitf_j2k --create-histogram-fast $(OBT_OUT_DIR)/t1.tif
+test1.test_command1: ossim-preproc -r -o --ch $(OBT_OUT_DIR)/t1.tif
 
-test1.test_command2: ossim-info -D -i -p $(OBT_OUT_DIR)/t1.tif > $(OBT_OUT_DIR)/t1-info.txt
+test1.test_command2: ossim-info -d -i -p $(OBT_OUT_DIR)/t1.tif > $(OBT_OUT_DIR)/t1-info.txt
 
 // Post process commands for diffs and stuff:
 
 test1.postprocess_command0: $(DIFF_CMD) $(OBT_EXP_DIR)/t1-info.txt $(OBT_OUT_DIR)/t1-info.txt
+test1.postprocess_command1: $(DIFF_CMD) $(OBT_EXP_DIR)/t1.his $(OBT_OUT_DIR)/t1.his
+
+
+// ---
+// Begin test2:
+// ---
+test2.name: test2
+test2.description: Test output of edge to edge world scene with chipper
+test2.enabled: 1
+
+// Commands to generate expected results:
+
+test2.expected_results_command0: ossim-chipper --op ortho -w ttbs $(OSSIM_BATCH_TEST_DATA)/public/bmng/july/world.200407.3x5400x2700.jpg $(OBT_EXP_DIR)/t2.tif
+
+test2.expected_results_command1: ossim-preproc -r -o --ch $(OBT_EXP_DIR)/t2.tif
+
+test2.expected_results_command2: ossim-info -d -i -p $(OBT_EXP_DIR)/t2.tif > $(OBT_EXP_DIR)/t2-info.txt
+
+// The actual commands to test:
+
+test2.test_command0: ossim-chipper --op ortho -w ttbs $(OSSIM_BATCH_TEST_DATA)/public/bmng/july/world.200407.3x5400x2700.jpg $(OBT_OUT_DIR)/t2.tif
+
+test2.test_command1: ossim-preproc -r -o --ch $(OBT_OUT_DIR)/t2.tif
+
+test2.test_command2: ossim-info -d -i -p $(OBT_OUT_DIR)/t2.tif > $(OBT_OUT_DIR)/t2-info.txt
+
+// Post process commands for diffs and stuff:
+
+test2.postprocess_command0: $(DIFF_CMD) $(OBT_EXP_DIR)/t2-info.txt $(OBT_OUT_DIR)/t2-info.txt
+test2.postprocess_command1: $(DIFF_CMD) $(OBT_EXP_DIR)/t2.his $(OBT_OUT_DIR)/t2.his
